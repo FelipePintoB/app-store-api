@@ -1,5 +1,10 @@
 import express from "express";
-import { routerApi } from "./router";
+import { routerApi } from "./routers";
+import {
+  boomErrorHandler,
+  errorHandler,
+  logError,
+} from "./midelwares/error.handler";
 
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -15,3 +20,7 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+app.use(logError);
+app.use(boomErrorHandler);
+app.use(errorHandler);
