@@ -26,10 +26,10 @@ productsRouter.get("/", (req, resp, next) => {
   try {
     resp.json([
       {
-        product: 1,
+        product: 11,
       },
       {
-        product: 2,
+        product: 22,
       },
     ]);
   } catch (error) {
