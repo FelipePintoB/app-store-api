@@ -8,7 +8,7 @@ import {
   InitOptions,
 } from "sequelize";
 
-const USER_TABLE = "users";
+export const USER_TABLE = "users";
 
 // This creates the structure and definition of an entity or table.
 export const UserSchema = {
