@@ -6,9 +6,10 @@ import {
   errorHandler,
   logError,
 } from "./midelwares/error.handler";
+import { SERVER_PORT } from "./config/config";
 
 const app = express();
-const port = process.env.SERVER_PORT;
+const port = SERVER_PORT;
 
 const whiteList = ["http:localhost:8080", `http:localhost:${port}`];
 const options: cors.CorsOptions = {
