@@ -4,5 +4,21 @@
   "service": "app",
   "workspaceFolder": "/usr/src",
   "forwardPorts": [3000],
-  "shutdownAction": "stopCompose"
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Prisma.prisma",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "formulahendry.auto-rename-tag",
+        "naumovs.color-highlight",
+        "ms-vscode-remote.remote-containers",
+        "EditorConfig.EditorConfig",
+        "dbaeumer.vscode-eslint",
+        "xabikos.JavaScriptSnippets",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
 }
