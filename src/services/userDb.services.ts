@@ -20,7 +20,7 @@ export const getUserService = async (userId: string) => {
         id: userId,
       },
     });
-    if (!user) throw boom.notFound("Product not found");
+    if (!user) throw boom.notFound("User not found");
     return user;
   } catch (error) {
     throw error;

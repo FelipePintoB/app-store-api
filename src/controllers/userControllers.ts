@@ -1,6 +1,7 @@
 import { NextFunction, Request, response, Response } from "express";
 import {
   createUserService,
+  deleteUserService,
   getListUserService,
   getUserService,
   updateUserService,
@@ -48,7 +49,7 @@ export class UserController {
   async deleteUser(req: Request, resp: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const user = await updateUserService(id, req.body);
+      const user = await deleteUserService(id);
       resp.json(user);
     } catch (error) {
       next(error);
