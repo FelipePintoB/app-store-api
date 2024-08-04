@@ -19,3 +19,19 @@ model User {
   lastName  String @default("")
   email     String @default("")
 }
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  images      String
+  description String
+  price       Int
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id      String    @id @default(uuid())
+  name    String    @default("")
+  Product Product[]
+}
