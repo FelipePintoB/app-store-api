@@ -1,31 +1,39 @@
 import express from "express";
+import { CategoryController } from "../controllers/categoryControllers";
+import { validatorHandler } from "../midelwares/validator.handler";
+import {
+  createCategorySchema,
+  getCategorySchema,
+  updateCategorySchema,
+} from "../schema/category.schema";
+
+const categoryController = new CategoryController();
 
 export const categoriesRouter = express.Router();
 
-categoriesRouter.get("/", (req, resp, next) => {
-  try {
-    resp.json([
-      {
-        product: 1,
-      },
-      {
-        product: 2,
-      },
-    ]);
-  } catch (error) {
-    next(error);
-  }
-});
+categoriesRouter.get("/", categoryController.getListedCategory);
 
-categoriesRouter.get("/:id", (req, resp, next) => {
-  try {
-    const { id } = req.params;
-    resp.json([
-      {
-        product: id,
-      },
-    ]);
-  } catch (error) {
-    next(error);
-  }
-});
+categoriesRouter.get(
+  "/:id",
+  validatorHandler(getCategorySchema, "params"),
+  categoryController.getCategory,
+);
+
+categoriesRouter.post(
+  "/",
+  validatorHandler(createCategorySchema, "body"),
+  categoryController.createCategory,
+);
+
+categoriesRouter.put(
+  "/:id",
+  validatorHandler(getCategorySchema, "params"),
+  validatorHandler(updateCategorySchema, "body"),
+  categoryController.updateCategory,
+);
+
+categoriesRouter.delete(
+  "/:id",
+  validatorHandler(getCategorySchema, "params"),
+  categoryController.deleteCategory,
+);
