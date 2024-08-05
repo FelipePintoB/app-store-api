@@ -6,86 +6,34 @@ import {
   getProductSchema,
   updateProductSchema,
 } from "../schema/product.schema";
+import { ProductController } from "../controllers/productControllers";
 
+const productController = new ProductController();
 export const productsRouter = express.Router();
+
+productsRouter.get("/", productController.getListedProducts);
+
+productsRouter.get(
+  "/:id",
+  validatorHandler(getProductSchema, "params"),
+  productController.getProduct,
+);
 
 productsRouter.post(
   "/",
   validatorHandler(createProductSchema, "body"),
-  (req, resp, next) => {
-    try {
-      const { body } = req;
-      resp.status(201).json(body);
-    } catch (error) {
-      next(error);
-    }
-  },
+  productController.createProduct,
 );
 
-productsRouter.get("/", (req, resp, next) => {
-  try {
-    resp.json([
-      {
-        product: 11,
-      },
-      {
-        product: 22,
-      },
-    ]);
-  } catch (error) {
-    next(error);
-  }
-});
-
-productsRouter.patch(
+productsRouter.put(
   "/:id",
-  validatorHandler(getProductSchema, "query"),
+  validatorHandler(getProductSchema, "params"),
   validatorHandler(updateProductSchema, "body"),
-  (req, resp, next) => {
-    try {
-      const { body, params } = req;
-      const { id } = params;
-      resp.json({
-        id,
-        data: body,
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
-);
-
-productsRouter.get(
-  "/:id",
-  validatorHandler(getProductSchema, "query"),
-  (req, resp, next) => {
-    try {
-      const { id } = req.params;
-      if (id === "0") {
-        throw boom.notFound("Product not found");
-      } else {
-        resp.status(200).json({
-          product: id,
-        });
-      }
-    } catch (error) {
-      next(error);
-    }
-  },
+  productController.updateProduct,
 );
 
 productsRouter.delete(
   "/:id",
-  validatorHandler(getProductSchema, "query"),
-  (req, resp, next) => {
-    try {
-      const { id } = req.params;
-      resp.json({
-        id,
-        message: "deleted",
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
+  validatorHandler(getProductSchema, "params"),
+  productController.deleteProduct,
 );
