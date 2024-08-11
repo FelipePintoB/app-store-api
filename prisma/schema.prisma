@@ -40,7 +40,7 @@ model Product {
 
 model ProductImages {
   id        String   @id @default(uuid())
-  img       String
+  imageUrl  String   @map("image_url")
   productId String   @map("product_id")
   product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now()) @map("created_at")
