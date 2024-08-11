@@ -1,5 +1,5 @@
 import express from "express";
-import { UserController } from "../controllers/userControllers";
+import { UserController } from "../controllers/user.controller";
 import { validatorHandler } from "../midelwares/validator.handler";
 import {
   createUserSchema,

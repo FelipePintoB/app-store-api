@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import boom from "@hapi/boom";
-import { CreateUserObj, UpdateUserObj } from "../models/userModels";
+import { CreateUserObj, UpdateUserObj } from "../models/user.models";
 
 const prisma = new PrismaClient();
 
@@ -37,14 +37,14 @@ export const createUserService = async (createDTO: CreateUserObj) => {
 };
 
 export const updateUserService = async (
-  uid: string,
+  userId: string,
   updateDTO: UpdateUserObj,
 ) => {
   try {
     const updatedUser = await prisma.user.update({
       data: { ...updateDTO },
       where: {
-        id: uid,
+        id: userId,
       },
     });
     return updatedUser;
@@ -53,11 +53,11 @@ export const updateUserService = async (
   }
 };
 
-export const deleteUserService = async (uid: string) => {
+export const deleteUserService = async (userId: string) => {
   try {
     const deletedUser = await prisma.user.delete({
       where: {
-        id: uid,
+        id: userId,
       },
     });
     return deletedUser;

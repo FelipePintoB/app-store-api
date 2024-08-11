@@ -1,5 +1,5 @@
 import joi from "joi";
-import { CreateUserObj } from "../models/userModels";
+import { CreateUserObj } from "../models/user.models";
 
 const id = joi.string();
 const firstName = joi.string();
