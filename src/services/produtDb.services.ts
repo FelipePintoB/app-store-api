@@ -1,12 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 import boom from "@hapi/boom";
-import { CreateProductObj, UpdateProductObj } from "../models/productModels";
+import { CreateProductObj, UpdateProductObj } from "../models/product.models";
 
 const prisma = new PrismaClient();
 
 export const getListProductService = async () => {
   try {
-    const listProducts = await prisma.product.findMany();
+    const listProducts = await prisma.product.findMany({
+      include: { category: true },
+    });
     return listProducts;
   } catch (error) {
     throw error;
@@ -18,6 +20,10 @@ export const getProductService = async (productId: string) => {
     const user = await prisma.product.findFirst({
       where: {
         id: productId,
+      },
+      include: {
+        category: true,
+        images: true,
       },
     });
     if (!user) throw boom.notFound("Product not found");
@@ -37,14 +43,14 @@ export const createProductService = async (createDTO: CreateProductObj) => {
 };
 
 export const updateProductService = async (
-  uid: string,
+  productId: string,
   updateDTO: UpdateProductObj,
 ) => {
   try {
     const updatedProduct = await prisma.product.update({
       data: { ...updateDTO },
       where: {
-        id: uid,
+        id: productId,
       },
     });
     return updatedProduct;
@@ -53,11 +59,11 @@ export const updateProductService = async (
   }
 };
 
-export const deleteProductService = async (uid: string) => {
+export const deleteProductService = async (productId: string) => {
   try {
     const deletedProduct = await prisma.product.delete({
       where: {
-        id: uid,
+        id: productId,
       },
     });
     return deletedProduct;

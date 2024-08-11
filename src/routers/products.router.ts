@@ -1,12 +1,11 @@
 import express from "express";
-import boom from "@hapi/boom";
 import { validatorHandler } from "../midelwares/validator.handler";
 import {
   createProductSchema,
   getProductSchema,
   updateProductSchema,
 } from "../schema/product.schema";
-import { ProductController } from "../controllers/productControllers";
+import { ProductController } from "../controllers/product.controller";
 
 const productController = new ProductController();
 export const productsRouter = express.Router();

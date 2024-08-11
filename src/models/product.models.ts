@@ -4,7 +4,8 @@ export type ProductObj = Prisma.ProductGetPayload<{}>;
 export type CreateProductObj = Omit<ProductObj, "id">;
 export type UpdateProductObj = CreateProductObj;
 
-// export type UserObj = {
-//   id: string;
-//   name: string;
-// };
+export type CreateProductExtraData = {
+  images?: string[];
+};
+
+export type CreateProductAllData = CreateProductObj & CreateProductExtraData;
