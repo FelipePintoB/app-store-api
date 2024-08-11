@@ -1,5 +1,5 @@
 import express from "express";
-import { CategoryController } from "../controllers/categoryControllers";
+import { CategoryController } from "../controllers/category.controller";
 import { validatorHandler } from "../midelwares/validator.handler";
 import {
   createCategorySchema,

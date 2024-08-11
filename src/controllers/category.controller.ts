@@ -39,6 +39,7 @@ export class CategoryController {
   async updateCategory(req: Request, resp: Response, next: NextFunction) {
     try {
       const { id } = req.params;
+      await getCategoryService(id);
       const user = await updateCategoryService(id, req.body);
       resp.json(user);
     } catch (error) {
@@ -49,6 +50,7 @@ export class CategoryController {
   async deleteCategory(req: Request, resp: Response, next: NextFunction) {
     try {
       const { id } = req.params;
+      await getCategoryService(id);
       const user = await deleteCategoryService(id);
       resp.json(user);
     } catch (error) {

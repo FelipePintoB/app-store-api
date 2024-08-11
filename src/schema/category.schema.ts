@@ -1,11 +1,11 @@
 import joi from "joi";
-import { CreateUserObj } from "../models/userModels";
-import { CreateCategoryObj, UpdateCategoryObj } from "../models/categoryModels";
+import {
+  CreateCategoryObj,
+  UpdateCategoryObj,
+} from "../models/category.models";
 
 const id = joi.string();
 const name = joi.string();
-const lastName = joi.string();
-const email = joi.string();
 
 export const getCategorySchema = joi.object({
   id: id.required(),

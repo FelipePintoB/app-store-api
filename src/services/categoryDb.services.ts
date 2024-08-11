@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import boom from "@hapi/boom";
-import { CreateCategoryObj, UpdateCategoryObj } from "../models/categoryModels";
+import {
+  CreateCategoryObj,
+  UpdateCategoryObj,
+} from "../models/category.models";
 
 const prisma = new PrismaClient();
 
@@ -13,11 +16,11 @@ export const getListCategoryService = async () => {
   }
 };
 
-export const getCategoryService = async (productId: string) => {
+export const getCategoryService = async (categoryId: string) => {
   try {
     const user = await prisma.category.findFirst({
       where: {
-        id: productId,
+        id: categoryId,
       },
     });
     if (!user) throw boom.notFound("Category not found");
@@ -39,14 +42,14 @@ export const createCategoryService = async (createDTO: CreateCategoryObj) => {
 };
 
 export const updateCategoryService = async (
-  uid: string,
+  categoryId: string,
   updateDTO: UpdateCategoryObj,
 ) => {
   try {
     const updatedCategory = await prisma.category.update({
       data: { ...updateDTO },
       where: {
-        id: uid,
+        id: categoryId,
       },
     });
     return updatedCategory;
@@ -55,11 +58,11 @@ export const updateCategoryService = async (
   }
 };
 
-export const deleteCategoryService = async (uid: string) => {
+export const deleteCategoryService = async (categoryId: string) => {
   try {
     const deletedCategory = await prisma.category.delete({
       where: {
-        id: uid,
+        id: categoryId,
       },
     });
     return deletedCategory;
