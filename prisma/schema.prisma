@@ -29,7 +29,7 @@ model Product {
   name        String
   images      ProductImages[]
   description String
-  price       Int
+  price       Decimal
   categoryId  String          @map("category_id")
   category    Category        @relation(fields: [categoryId], references: [id])
   createdAt   DateTime        @default(now()) @map("created_at")
