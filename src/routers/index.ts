@@ -3,6 +3,7 @@ import { productsRouter } from "./products.router";
 import { usersRouter } from "./users.router";
 import { categoriesRouter } from "./categories.router";
 import { productImagesRouter } from "./productsImages.router";
+import { ordersRouter } from "./orders.router";
 
 export function routerApi(app: Application) {
   const router = Router();
@@ -11,4 +12,5 @@ export function routerApi(app: Application) {
   router.use("/product-images", productImagesRouter);
   router.use("/users", usersRouter);
   router.use("/categories", categoriesRouter);
+  router.use("/orders", ordersRouter);
 }
