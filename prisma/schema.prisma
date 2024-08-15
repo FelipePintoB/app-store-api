@@ -18,8 +18,11 @@ model User {
   firstName String   @default("") @map("first_name")
   lastName  String   @default("") @map("last_name")
   email     String   @default("")
+  password  String   @default("")
+  role      String   @default("Customer")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  Orders    Order[]
 
   @@map("users")
 }
@@ -34,6 +37,7 @@ model Product {
   category    Category        @relation(fields: [categoryId], references: [id])
   createdAt   DateTime        @default(now()) @map("created_at")
   updatedAt   DateTime        @updatedAt @map("updated_at")
+  OrderItems  OrderItems[]
 
   @@map("products")
 }
@@ -57,4 +61,29 @@ model Category {
   updatedAt DateTime  @updatedAt @map("updated_at")
 
   @@map("categories")
+}
+
+model Order {
+  id         String       @id @default(uuid())
+  userId     String
+  user       User         @relation(fields: [userId], references: [id])
+  status     String       @default("")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+  OrderItems OrderItems[]
+
+  @@map("orders")
+}
+
+model OrderItems {
+  id        String   @id @default(uuid())
+  order     Order    @relation(fields: [ordersId], references: [id])
+  ordersId  String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  amount    Int
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("order_items")
 }
