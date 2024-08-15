@@ -3,15 +3,15 @@ import {
   createCategoryService,
   deleteCategoryService,
   getCategoryService,
-  getListCategoryService,
+  getListCategoriesService,
   updateCategoryService,
 } from "../services/categoryDb.services";
 
 export class CategoryController {
-  async getListedCategory(req: Request, resp: Response, next: NextFunction) {
+  async getListedCategories(req: Request, resp: Response, next: NextFunction) {
     try {
-      const users = await getListCategoryService();
-      resp.json(users);
+      const categories = await getListCategoriesService();
+      resp.json(categories);
     } catch (error) {
       next(error);
     }
@@ -20,8 +20,8 @@ export class CategoryController {
   async getCategory(req: Request, resp: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const user = await getCategoryService(id);
-      resp.json(user);
+      const category = await getCategoryService(id);
+      resp.json(category);
     } catch (error) {
       next(error);
     }
@@ -29,8 +29,8 @@ export class CategoryController {
 
   async createCategory(req: Request, resp: Response, next: NextFunction) {
     try {
-      const user = await createCategoryService(req.body);
-      resp.json(user);
+      const category = await createCategoryService(req.body);
+      resp.json(category);
     } catch (error) {
       next(error);
     }
@@ -40,8 +40,8 @@ export class CategoryController {
     try {
       const { id } = req.params;
       await getCategoryService(id);
-      const user = await updateCategoryService(id, req.body);
-      resp.json(user);
+      const category = await updateCategoryService(id, req.body);
+      resp.json(category);
     } catch (error) {
       next(error);
     }
@@ -51,8 +51,8 @@ export class CategoryController {
     try {
       const { id } = req.params;
       await getCategoryService(id);
-      const user = await deleteCategoryService(id);
-      resp.json(user);
+      const category = await deleteCategoryService(id);
+      resp.json(category);
     } catch (error) {
       next(error);
     }

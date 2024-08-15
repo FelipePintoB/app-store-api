@@ -11,7 +11,7 @@ const categoryController = new CategoryController();
 
 export const categoriesRouter = express.Router();
 
-categoriesRouter.get("/", categoryController.getListedCategory);
+categoriesRouter.get("/", categoryController.getListedCategories);
 
 categoriesRouter.get(
   "/:id",

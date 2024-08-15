@@ -7,7 +7,7 @@ import {
 
 const prisma = new PrismaClient();
 
-export const getListCategoryService = async () => {
+export const getListCategoriesService = async () => {
   try {
     const listCategorys = await prisma.category.findMany();
     return listCategorys;
